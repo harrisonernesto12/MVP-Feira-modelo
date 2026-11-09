@@ -20,5 +20,8 @@ public interface ProductDao {
     void updateProduct(Product product);
 
     @Insert
+    void insertProduct(Product product);
+
+    @Insert
     void insertInitialData(List<Product> products);
 }

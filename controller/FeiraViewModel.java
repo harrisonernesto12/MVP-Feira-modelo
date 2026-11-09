@@ -26,6 +26,15 @@ public class FeiraViewModel extends AndroidViewModel {
         return productList;
     }
 
+    public void saveProduct(Product product) {
+        if (product.isAvailable() && product.getPrice() == null) {
+            throw new NumberFormatException("Preço não pode ser nulo para itens disponíveis");
+        }
+
+        // A gravação no Room deve ocorrer de forma assíncrona no ExecutorService.
+        executorService.execute(() -> dao.insertProduct(product));
+    }
+
     public boolean verifyPin(String pin) {
         return pin.equals("1234");
     }
